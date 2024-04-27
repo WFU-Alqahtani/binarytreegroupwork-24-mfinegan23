@@ -213,7 +213,7 @@ public class LinkedTree {
                 trav = trav.right;
             }
         }
-        
+
         // Insert the new node.
         Node newNode = new Node(key, data);
         if (parent == null) {    // the tree was empty
@@ -324,7 +324,12 @@ public class LinkedTree {
      */
     public static int sumKeysTree(Node root) {
         /*** LAB 10: IMPLEMENT THIS METHOD ***/
-        return 0;
+
+        if (root == null) {
+            return 0;
+        }
+
+        return root.key + sumKeysTree(root.left) + sumKeysTree(root.right);
     }
     
     /*
@@ -336,12 +341,47 @@ public class LinkedTree {
      */
     public int sumAlongPath(int key) {
         /*** LAB 10: IMPLEMENT THIS METHOD ***/
-        return 0;
+
+
+       int sum = 0;
+
+       Node temp = root;
+
+       while (temp != null) {
+
+           sum += temp.key;
+
+           if (key == temp.key) {
+               break;
+           }
+           else if (key < temp.key) {
+               temp = temp.left;
+           }
+           else {
+               temp = temp.right;
+           }
+
+
+       }
+
+
+        return sum;
     }
     
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        
+
+
+//        LinkedTree tree = new LinkedTree();
+//        int[] keys = {8, 4, 15, 2, 5, 30};
+//        tree.insertKeys(keys);
+//        System.out.println(tree.sumAlongPath(12));
+
+//        LinkedTree tree = new LinkedTree();
+//        int[] keys = {8, 4, 10, 2};
+//        tree.insertKeys(keys);
+//        System.out.println(tree.sumKeys());
+
         LinkedTree tree = new LinkedTree();
         tree.insert(7, "root node");
         tree.insert(9, "7's right child");
@@ -381,6 +421,7 @@ public class LinkedTree {
         } else {
             System.out.println("no such key in tree");
         }
+
         
         System.out.print("\n preorder: ");
         tree.preorderPrint();
@@ -391,5 +432,7 @@ public class LinkedTree {
         System.out.print("  inorder: ");
         tree.inorderPrint();
         tree.levelOrderPrint();
+
+
     }
 }
